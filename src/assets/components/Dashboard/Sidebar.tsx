@@ -1,0 +1,81 @@
+import { Sidebar as MySidebar, SidebarContent, SidebarHeader } from "@/components/ui/sidebar";
+
+import {
+  Users,
+  Package,
+  ShoppingCart,
+  Home,
+  Settings,
+  ChartBarStacked
+} from "lucide-react";
+
+import NavItem from "./NavItem";
+
+const Sidebar = () => {
+  const navItems = [
+    {
+      title: "Tableau de bord",
+      icon: Home,
+      href: "/dashboard",
+      items: []
+    },
+    {
+      title: "Catégories",
+      icon: ChartBarStacked,
+      href: "/dashboard/clients",
+      items: []
+    },
+    {
+      title: "Produits",
+      icon: Package,
+      href: "/dashboard/products",
+      items: []
+    },
+    {
+      title: "Ventes",
+      icon: ShoppingCart,
+      href: "/dashboard/sales",
+      items: []
+    },
+    {
+      title: "Paramètres",
+      icon: Settings,
+      href: "/dashboard/settings",
+      items: []
+    }
+  ];
+
+  return (
+    <MySidebar>
+
+      <SidebarHeader>
+        <div className="flex items-center gap-2 px-4 py-3">
+          <div className="w-8 h-8 bg-[#3FB076] rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-sm">DB</span>
+          </div>
+          <div>
+            <h2 className="font-semibold">Tableau de bord</h2>
+            <p className="text-sm text-muted-foreground">Administration</p>
+          </div>
+        </div>
+      </SidebarHeader>
+
+      <SidebarContent>
+        <nav className="flex flex-col gap-1 p-2">
+          {navItems.map((item) => (
+            <NavItem
+              key={item.href}
+              title={item.title}
+              icon={item.icon}
+              href={item.href}
+            />
+          ))}
+        </nav>
+      </SidebarContent>
+
+
+    </MySidebar>
+  )
+}
+
+export default Sidebar
