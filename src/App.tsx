@@ -7,6 +7,7 @@ import ClientConnexion from "./assets/pages/ClientConnexion"
 import ClientInscription from "./assets/pages/ClientInscription"
 import DashboardLayout from "./assets/components/Dashboard/DashboardLayout"
 import Dashboard from "./assets/pages/Dashboard"
+import Profil from "./assets/components/Profil/Profile.tsx"
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
         <Route index element={<Dashboard />} />
       </Route>
 
+
+      <Route path="/profil" element={<Profil/>} />
     </Routes >
 
   )
