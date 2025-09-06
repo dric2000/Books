@@ -5,11 +5,10 @@ import { SelectValue } from "@radix-ui/react-select"
 const BooksFilters = () => {
   return (
     <div className="flex gap-5 items-center px-20">
-      <h1 className="text-2xl">Rechercher par : </h1>
-      <Input placeholder="Titre" className="w-60 border-[#3FB076]" />
-      <Input placeholder="Auteur" className="w-60 border-[#3FB076]" />
+      <Input placeholder="Titre" className="w-60 h-12 border-[#3FB076] " />
+      <Input placeholder="Auteur" className="w-60 border-[#3FB076] h-12" />
       <Select>
-        <SelectTrigger className="w-60 border-[#3FB076]">
+        <SelectTrigger className="w-60 border-[#3FB076] !h-12">
           <SelectValue placeholder="Sélectionner une catégorie"></SelectValue>
         </SelectTrigger>
         <SelectContent>
