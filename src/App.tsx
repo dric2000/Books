@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom"
 import DashboardLayout from "./assets/components/Dashboard/DashboardLayout"
+import Profile from "./assets/components/Profil/Profile"
 import AdminConnexion from "./assets/pages/AdminConnexion"
 import BookDetails from "./assets/pages/BookDetails"
 import BooksList from "./assets/pages/BooksList"
+import Categories from "./assets/pages/Categories"
 import ClientAccount from "./assets/pages/ClientAccount"
 import ClientConnexion from "./assets/pages/ClientConnexion"
 import ClientInscription from "./assets/pages/ClientInscription"
 import Dashboard from "./assets/pages/Dashboard"
 import ProductsList from "./assets/pages/ProductsList"
-import Categories from "./assets/pages/Categories"
 
 function App() {
 
@@ -26,9 +27,14 @@ function App() {
 
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
+
         <Route path="productsList" element={<ProductsList />} />
         <Route path="categories" element={<Categories />} />
+        <Route path="profil" element={<Profile />} />
+
       </Route>
+
+
 
     </Routes >
 
