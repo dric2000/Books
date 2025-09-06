@@ -1,12 +1,11 @@
 import { Sidebar as MySidebar, SidebarContent, SidebarHeader } from "@/components/ui/sidebar";
 
 import {
-  Users,
-  Package,
-  ShoppingCart,
+  ChartBarStacked,
   Home,
+  Package,
   Settings,
-  ChartBarStacked
+  ShoppingCart
 } from "lucide-react";
 
 import NavItem from "./NavItem";
@@ -20,15 +19,15 @@ const Sidebar = () => {
       items: []
     },
     {
-      title: "Catégories",
+      title: "Categories",
       icon: ChartBarStacked,
-      href: "/dashboard/clients",
+      href: "/dashboard/categories",
       items: []
     },
     {
       title: "Produits",
       icon: Package,
-      href: "/dashboard/products",
+      href: "/dashboard/productsList",
       items: []
     },
     {
