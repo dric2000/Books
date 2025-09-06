@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import { Bar, BarChart, Line, LineChart, RadialBar, RadialBarChart, ResponsiveContainer } from "recharts";
