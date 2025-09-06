@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom"
+import DashboardLayout from "./assets/components/Dashboard/DashboardLayout"
+import Profil from "./assets/components/Profil/Profile.tsx"
 import AdminConnexion from "./assets/pages/AdminConnexion"
 import BookDetails from "./assets/pages/BookDetails"
 import BooksList from "./assets/pages/BooksList"
 import ClientAccount from "./assets/pages/ClientAccount"
 import ClientConnexion from "./assets/pages/ClientConnexion"
 import ClientInscription from "./assets/pages/ClientInscription"
-import DashboardLayout from "./assets/components/Dashboard/DashboardLayout"
 import Dashboard from "./assets/pages/Dashboard"
-import Profil from "./assets/components/Profil/Profile.tsx"
 
 function App() {
 
@@ -25,10 +25,11 @@ function App() {
 
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="profil" element={<Profil />} />
       </Route>
 
 
-      <Route path="/profil" element={<Profil/>} />
+
     </Routes >
 
   )
