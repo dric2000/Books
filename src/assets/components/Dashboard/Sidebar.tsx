@@ -37,9 +37,9 @@ const Sidebar = () => {
       items: []
     },
     {
-      title: "Paramètres",
+      title: "Profil",
       icon: Settings,
-      href: "/dashboard/settings",
+      href: "/dashboard/profil",
       items: []
     }
   ];

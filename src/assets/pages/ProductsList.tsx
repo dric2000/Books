@@ -1,7 +1,10 @@
-import ProductsTable from "../components/Products/ProductsTable"
+import ProductsTable from "../components/Products/ProductsTable";
 
 
 const ProductsList = () => {
+
+
+
   return (
     <div className="w-full max-w-full">
 
