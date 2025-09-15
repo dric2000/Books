@@ -4,6 +4,7 @@ import categoriesReducer from "../slices/categoriesSlice";
 import productsReducer from "../slices/productsSlice";
 import salesReducer from "../slices/salesSlice";
 import usersReducer from "../slices/usersSlice";
+import darkModeReducer from '../slices/darkModeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     auth: userReducer,
     users: usersReducer,
     sales: salesReducer,
+    darkMode : darkModeReducer
   },
 });
 

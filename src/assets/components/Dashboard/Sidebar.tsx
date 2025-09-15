@@ -62,7 +62,7 @@ const Sidebar = () => {
       <SidebarContent>
         <nav className="flex flex-col gap-1 p-2">
           {navItems.map((item) => (
-            <NavItem
+            <NavItem 
               key={item.href}
               title={item.title}
               icon={item.icon}

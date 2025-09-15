@@ -169,12 +169,12 @@ const ProductsTable: React.FC = () => {
     if (status === "failed") return <div className="text-red-600 text-center mt-10">{error}</div>;
 
     return (
-        <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
+        <div className="p-6 space-y-6 bg-gray-50 min-h-screen dark:bg-gray-800">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 ">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900">Gestion des Produits</h2>
-                    <p className="text-sm text-gray-600 mt-1">{products.length} produits • Valeur totale : {formatPrice(totalValue)}</p>
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Gestion des Produits</h2>
+                    <p className="text-sm text-gray-600 mt-1 dark:text-gray-500">{products.length} produits • Valeur totale : {formatPrice(totalValue)}</p>
                 </div>
                 {/* Add Dialog */}
                 <Dialog open={addOpen} onOpenChange={setAddOpen}>
@@ -228,9 +228,9 @@ const ProductsTable: React.FC = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white rounded-lg border shadow-sm overflow-x-auto">
+            <div className="bg-white rounded-lg border shadow-sm overflow-x-auto dark:bg-gray-700">
                 <table className="w-full">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
                         {["titre", "quantite", "prix", "total"].map((field) => (
                             <th key={field} className="px-6 py-3 text-left">
@@ -248,10 +248,10 @@ const ProductsTable: React.FC = () => {
                         const stockStatus = getStockStatus(product.quantite);
                         const total = product.prix * product.quantite;
                         return (
-                            <tr key={product.id} className="hover:bg-gray-50">
+                            <tr key={product.id} className="hover:bg-gray-50 hover:dark:bg-gray-600">
                                 <td className="px-6 py-4">
                                     <div className="font-medium text-gray-900 text-xl">{product.titre}</div>
-                                    <div className="text-xs text-gray-500">ID: {product.id}</div>
+                                    <div className="text-xs text-gray-500 dark:text-white">ID: {product.id}</div>
                                 </td>
                                 <td className="px-6 py-4 text-right"><span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xl font-medium ${stockStatus.color}`}>{product.quantite} unités</span></td>
                                 <td className="px-6 py-4 text-right text-xl font-medium text-gray-900">{formatPrice(product.prix)}</td>
@@ -277,8 +277,8 @@ const ProductsTable: React.FC = () => {
 
             {/* Pagination */}
             {totalPages > 1 && (
-                <div className="flex justify-between items-center bg-white px-6 py-4 border rounded-lg shadow-sm">
-                    <div className="flex space-x-2 text-sm text-gray-700">Page {currentPage} sur {totalPages} ({sortedProducts.length} résultat{sortedProducts.length > 1 ? "s" : ""})</div>
+                <div className="flex justify-between items-center bg-white px-6 py-4 border rounded-lg shadow-sm dark:bg-gray-700">
+                    <div className="flex space-x-2 text-sm text-gray-700 dark:text-white">Page {currentPage} sur {totalPages} ({sortedProducts.length} résultat{sortedProducts.length > 1 ? "s" : ""})</div>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline" size="sm" onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage === 1}>Précédent</Button>
                         {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {

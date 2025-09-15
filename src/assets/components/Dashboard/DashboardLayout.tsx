@@ -10,14 +10,26 @@ import { Bell, LogOut, Settings } from "lucide-react";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import Sidebar from "./Sidebar";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDarkMode } from "@/slices/darkModeSlice";
+
 
 
 const DashboardLayout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const mode = useSelector((state: any) => state.darkMode.mode);
+
   const { user, isLoading } = useAppSelector((state) => state.auth);
 
+  useEffect(() =>{
+    if(mode){
+      document.documentElement.classList.add("dark");
+    }else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [mode])
   useEffect(() => {
     if (!user) {
       dispatch(fetchCurrentUser())
@@ -49,13 +61,17 @@ const DashboardLayout = () => {
               <h1 className="text-2xl font-semibold ml-4">Tableau de bord</h1>
             </div>
             <div>
-              <Menubar className="p-6">
+              <Menubar className="p-6 ">
 
                 <MenubarMenu>
                   <MenubarTrigger>
                     <div className="flex items-center space-x-2">
-                      <Switch id="airplane-mode" />
-                      <Label htmlFor="airplane-mode">Mode sombre</Label>
+                      <Switch
+                        id="dark-mode"
+                        checked={mode}                     
+                        onCheckedChange={() => dispatch(toggleDarkMode())}
+                      />
+                      <Label htmlFor="dark-mode">Mode sombre</Label>
                     </div>
                   </MenubarTrigger>
                 </MenubarMenu>

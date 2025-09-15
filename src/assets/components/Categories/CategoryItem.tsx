@@ -56,7 +56,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
     }
   };
   return (
-    <div className="flex flex-col gap-5 bg-white shadow-lg rounded-2xl p-5 h-130 border-2">
+    <div className="flex flex-col gap-5 bg-white shadow-lg rounded-2xl p-5 h-130 border-2 dark:bg-gray-700">
 
       <div className="flex flex-row justify-between">
         <img src="/CategoriesImage.png" className="w-50 h-50 object-cover" alt="" />
