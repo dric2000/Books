@@ -101,7 +101,7 @@ const Dashboard = () => {
 
             {/* Première ligne */}
             <div className="flex flex-col lg:flex-row gap-6">
-                <div className="bg-white shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2">
+                <div className="bg-white dark:bg-gray-700 shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2 border-gray-200 dark:border-gray-700">
                     <div className="flex flex-col gap-3 text-center md:text-left">
                         <h1 className="text-xl md:text-2xl">Total des produits</h1>
                         <span className="text-4xl md:text-5xl"> {products.length} </span>
@@ -113,7 +113,7 @@ const Dashboard = () => {
                     <img src="/DashboardImages/products.png" className="w-24 h-24 md:w-32 md:h-32 object-cover" alt="" />
                 </div>
 
-                <div className="bg-white shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2">
+                <div className="bg-white dark:bg-gray-700 shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2 border-gray-200 dark:border-gray-700">
                     <div className="flex flex-col gap-3 text-center md:text-left">
                         <h1 className="text-xl md:text-2xl">Ventes réalisés</h1>
                         <span className="text-3xl md:text-5xl"> {totalValue} € </span>
@@ -125,7 +125,7 @@ const Dashboard = () => {
                     <img src="/DashboardImages/sales.png" className="w-24 h-24 md:w-32 md:h-32 object-cover" alt="" />
                 </div>
 
-                <div className="bg-white shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2">
+                <div className="bg-white dark:bg-gray-700 shadow-xl/10 flex flex-col md:flex-row gap-5 rounded-3xl justify-between items-center p-5 md:w-1/3 w-full border-2 border-gray-200 dark:border-gray-700">
                     <div className="flex flex-col gap-3 text-center md:text-left">
                         <h1 className="text-xl md:text-2xl">Retours clients</h1>
                         <span className="text-4xl md:text-5xl">7</span>
@@ -204,7 +204,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Produits les plus achetés */}
-                <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-5 w-full lg:w-1/3 border-2">
+                <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-5 w-full lg:w-1/3 border-2 dark:bg-gray-700">
                     <h1 className="text-xl md:text-2xl font-semibold">Les plus achetés</h1>
                     <div className="flex flex-col gap-6 text-sm md:text-lg">
                         <div className="flex flex-col gap-2">
@@ -355,7 +355,7 @@ const Dashboard = () => {
                     </Card>
                 </div>
 
-                <div className="w-full lg:w-1/2 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-6 border-2">
+                <div className="w-full lg:w-1/2 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-6 border-2 dark:bg-gray-700">
                     <h1 className="text-2xl font-semibold">Note</h1>
                     <p className="text-sm md:text-base lg:text-lg">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero dicta

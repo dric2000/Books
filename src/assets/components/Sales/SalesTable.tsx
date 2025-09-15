@@ -61,12 +61,12 @@ const SalesTable = () => {
   );
 
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
+    <div className="p-6 space-y-6 bg-gray-50 min-h-screen dark:bg-gray-700">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 ">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Total des ventes</h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-200">Total des ventes</h2>
+          <p className="text-sm text-gray-600 mt-1 dark:text-gray-400">
             {totalVentes.toLocaleString("fr-FR", {
               style: "currency",
               currency: "EUR",

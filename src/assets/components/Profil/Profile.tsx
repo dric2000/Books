@@ -57,14 +57,14 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 dark:bg-black">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
           <div className="h-32 bg-[#3FB076]"></div>
           <div className="relative px-6 pb-6">
             {/* Photo de profil */}
-            <div className="relative -mt-16 mb-4">
+            <div className="relative -mt-16 mb-4 ">
               <div className="relative inline-block">
                 <img
                   src='https://ui-avatars.com/api/?name=${user.first_name}+${user.last_name}&background=3b82f6&color=fff&size=120'
@@ -84,7 +84,7 @@ const UserProfile = () => {
             </div>
 
             {/* Nom et actions */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between ">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
                   {user.firstname} {user.lastname}
@@ -125,13 +125,13 @@ const UserProfile = () => {
         {/* Informations personnelles */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Informations personnelles</h2>
+            <div className="bg-white rounded-xl shadow-sm p-6 dark:bg-gray-700">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6 dark:text-gray-500">Informations personnelles</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Prénom */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 dark:text-black">
                     <User size={16} />
                     Prénom
                   </label>
@@ -149,7 +149,7 @@ const UserProfile = () => {
 
                 {/* Nom */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 dark:text-black">
                     <User size={16} />
                     Nom
                   </label>
@@ -167,7 +167,7 @@ const UserProfile = () => {
 
                 {/* Email */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 dark:text-black">
                     <Mail size={16} />
                     Email
                   </label>
@@ -185,7 +185,7 @@ const UserProfile = () => {
 
                 {/* Téléphone */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2 dark:text-black">
                     <Phone size={16} />
                     Téléphone
                   </label>
@@ -198,7 +198,7 @@ const UserProfile = () => {
                       placeholder="Numéro de téléphone"
                     />
                   ) : (
-                    <p className="text-gray-900 py-2">{user.phone || 'Non renseigné'}</p>
+                    <p className="text-gray-900 py-2 dark:text-white">{user.phone || 'Non renseigné'}</p>
                   )}
                 </div>
 
@@ -210,35 +210,35 @@ const UserProfile = () => {
           {/* Sidebar - Informations supplémentaires */}
           <div className="space-y-6">
             {/* Statistiques */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Statistiques</h3>
+            <div className="bg-white rounded-xl shadow-sm p-6 dark:bg-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 dark:text-gray-500">Statistiques</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Articles créés</span>
-                  <span className="font-semibold text-blue-600">24</span>
+                  <span className="text-gray-600 dark:text-black">Articles créés</span>
+                  <span className="font-semibold text-blue-600 dark:text-black">24</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Dernière connexion</span>
-                  <span className="font-semibold text-gray-900">Aujourd'hui</span>
+                  <span className="text-gray-600 dark:text-black">Dernière connexion</span>
+                  <span className="font-semibold text-gray-900 dark:text-black">Aujourd'hui</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Membre depuis</span>
-                  <span className="font-semibold text-gray-900">Jan 2024</span>
+                  <span className="text-gray-600 dark:text-black">Membre depuis</span>
+                  <span className="font-semibold text-gray-900 dark:text-black">Jan 2024</span>
                 </div>
               </div>
             </div>
 
             {/* Paramètres rapides */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Paramètres</h3>
+            <div className="bg-white rounded-xl shadow-sm p-6 dark:bg-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 dark:text-gray-500">Paramètres</h3>
               <div className="space-y-3">
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors dark:text-black">
                   Changer le mot de passe
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors dark:text-black">
                   Paramètres de notification
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors dark:text-black">
                   Sécurité et confidentialité
                 </button>
               </div>

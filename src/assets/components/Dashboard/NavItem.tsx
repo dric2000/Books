@@ -14,8 +14,8 @@ const NavItem = ({ title, icon: Icon, href }: NavItemProps) => {
     <Link
       to={href}
       className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all hover:bg-green-100",
-        isActive && "bg-green-100 text-accent-foreground"
+        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all hover:bg-green-100","hover:bg-green-100 dark:hover:bg-green-800",
+        isActive && "bg-green-100 dark:bg-green-800 font-semibold text-green-800 dark:text-green-200"
       )}
     >
       <Icon className="h-4 w-4" />
