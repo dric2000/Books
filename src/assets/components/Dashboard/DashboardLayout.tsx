@@ -1,17 +1,46 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger } from "@/components/ui/menubar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Bell, LogOut, Settings } from "lucide-react";
-import { Outlet } from "react-router";
-import Sidebar from "./Sidebar";
 import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux.ts";
+import { fetchCurrentUser, logoutUser } from "@/slices/authSlice.ts";
+import { Bell, LogOut, Settings } from "lucide-react";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
+import Sidebar from "./Sidebar";
+
 
 const DashboardLayout = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetchCurrentUser())
+    }
+  }, [dispatch, user])
+
+
+  const getUserFullName = (user: any) => {
+    if (!user?.data) return "Utilisateur"; // ← String
+    const firstName = user.data.prenom || "";
+    const lastName = user.data.nom || "";
+    return `${firstName} ${lastName}`.trim() || user.data.email || "Utilisateur"; // ← String
+  };
+
+
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/connexion-admin");
+  }
   return (
     <SidebarProvider>
-      <div className="flex h-screen bg-background w-full">
+      <div className="flex bg-background w-full">
         <Sidebar />
         <main className="flex-1 flex flex-col overflow-hidden min-w-0">
           <header className="h-20 border-b flex justify-between items-center px-4 flex-shrink-0">
@@ -58,7 +87,8 @@ const DashboardLayout = () => {
 
                 <MenubarMenu>
                   <MenubarTrigger>
-                    <Avatar>
+                    {isLoading ? "Chargement..." : getUserFullName(user)}
+                    <Avatar className="ml-5">
                       <AvatarImage src="https://github.com/shadcn.png" />
                       <AvatarFallback>CB</AvatarFallback>
                     </Avatar>
@@ -71,7 +101,7 @@ const DashboardLayout = () => {
                     <MenubarSeparator />
                     <MenubarItem>Sécurité</MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem className="text-red-600">
+                    <MenubarItem className="text-red-600" onClick={handleLogout}>
                       <LogOut className="text-red-600" />
                       Déconnexion
                     </MenubarItem>
