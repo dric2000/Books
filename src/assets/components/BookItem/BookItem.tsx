@@ -12,14 +12,14 @@ const BookItem = ({ id, product }: BookItemProps) => {
   };
   return (
     <div>
-      <Card className="w-70 border-[#3FB076] hover:border-3 transition-all duration-300 group">
+      <Card className="w-70 h-130 border-[#3FB076] hover:border-3 transition-all duration-300 group">
         <div className="flex flex-row items-center justify-between px-5">
           <Badge className="h-5 min-w-5 rounded-full px-1 bg-[#3FB076]">
             87
           </Badge>
           <Badge variant="outline">{product.reference}</Badge>
         </div>
-        <CardContent className="p-2">
+        <CardContent className="">
           <img src="/cover.png" alt="" className="rounded-md transform transition-transform duration-300 group-hover:scale-110" onClick={handleClick} />
         </CardContent>
 
