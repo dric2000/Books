@@ -7,6 +7,7 @@ export interface Product {
   prix: number;
   quantite: number;
   category: number;
+  image: string;
   created_at: string;
   updated_at: string;
 }
@@ -129,6 +130,7 @@ export interface Commande {
   quantite_total: number;
   montant_total: number;
   ligne_commandes: LigneCommande[];
+  detail_client: Client;
 }
 
 export interface SalesState {

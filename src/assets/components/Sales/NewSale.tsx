@@ -128,12 +128,11 @@ const NewSale = ({ open, onOpenChange, onSuccess, clients, products }: NewSaleMo
       await createFromFormData(formData);
 
       toast.success("Commande créée avec succès !");
+      onSuccess?.();
 
       // Fermer le modal et callback
       onOpenChange(false);
-      if (onSuccess) {
-        onSuccess();
-      }
+
     } catch (err: any) {
       console.error("Erreur lors de la création:", err);
       setError(err.message || "Une erreur s'est produite lors de la création de la commande");

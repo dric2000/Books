@@ -13,13 +13,11 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { fetchProducts } from "@/slices/productsSlice";
 import { fectchSales } from "@/slices/salesSlice";
 import { fetchUsers } from "@/slices/usersSlice";
-import { Pencil, Plus, Trash } from "lucide-react";
+import { ChevronDown, ChevronRight, Pencil, Plus, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import NewSale from "./NewSale";
 
-
 const SalesTable = () => {
-
   const dispatch = useAppDispatch();
 
   const { data: commandes, loading, error } = useAppSelector((state) => state.sales);
@@ -27,41 +25,38 @@ const SalesTable = () => {
   const { items: products } = useAppSelector((state) => state.products);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expandedCommandes, setExpandedCommandes] = useState<number[]>([]);
 
   const clients = users
     .filter(user => user.type_user === "client")
     .map((user, index) => ({
       ...user,
-      id: index + 1 // ID temporaire basé sur l'index
-      // Ou si tu as un autre champ unique : id: user.email.hashCode() ou similar
+      id: index + 1
     }));
 
   // Effet pour charger les données au montage du composant
   useEffect(() => {
     dispatch(fectchSales());
-    dispatch(fetchUsers({ page: 1, limit: 100 })); // Charger 100 utilisateurs
-    dispatch(fetchProducts()); // Charger 100 articles
-    dispatch(fectchSales());
+    dispatch(fetchUsers({ page: 1, limit: 100 }));
+    dispatch(fetchProducts());
   }, [dispatch]);
 
-
-  // Fonction pour rafraîchir les données après une création
-  const handleRefreshAfterCreate = () => {
-    dispatch(fectchSales());
+  const handleRefreshAfterCreate = async () => {
+    await dispatch(fectchSales()).unwrap();
   };
 
+  // Fonction pour basculer l'affichage des détails d'une commande
+  const toggleCommandeDetails = (commandeId: number) => {
+    if (expandedCommandes.includes(commandeId)) {
+      setExpandedCommandes(expandedCommandes.filter(id => id !== commandeId));
+    } else {
+      setExpandedCommandes([...expandedCommandes, commandeId]);
+    }
+  };
 
-  // On "aplatit" toutes les lignes de commande
-  const lignes = commandes.flatMap((commande) =>
-    (commande.ligne_commandes || []).map((ligne) => ({
-      ...ligne,
-      client: commande.client, // on ajoute le client pour chaque ligne
-    }))
-  );
-
-  // Total général basé sur toutes les lignes
-  const totalVentes = lignes.reduce(
-    (sum, ligne) => sum + (ligne.montant_total ?? 0),
+  // Total général basé sur toutes les commandes
+  const totalVentes = commandes.reduce(
+    (sum, commande) => sum + (commande.montant_total ?? 0),
     0
   );
 
@@ -88,13 +83,13 @@ const SalesTable = () => {
 
       <div>
         <Table>
-          <TableCaption>Liste des ventes (détail par article)</TableCaption>
+          <TableCaption>Liste des ventes</TableCaption>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-[50px]"></TableHead>
+              <TableHead>Numéro de commande</TableHead>
               <TableHead>Client</TableHead>
-              <TableHead>Produit</TableHead>
-              <TableHead>Quantité</TableHead>
-              <TableHead>Prix unitaire</TableHead>
+              <TableHead>Nombre d'articles</TableHead>
               <TableHead>Montant total</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -112,40 +107,91 @@ const SalesTable = () => {
                   {error}
                 </TableCell>
               </TableRow>
-            ) : lignes.length > 0 ? (
-              lignes.map((ligne, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    {ligne.client.nom} {ligne.client.prenom}
-                  </TableCell>
-                  <TableCell>
-                    {/* Si tu as le nom du produit dans ligne.article, affiche-le */}
-                    {typeof ligne.article === "object"
-                      ? ligne.article.nom
-                      : `Article #${ligne.article}`}
-                  </TableCell>
-                  <TableCell>{ligne.quantite}</TableCell>
-                  <TableCell>
-                    {ligne.prix_unitaire.toLocaleString("fr-FR", {
-                      style: "currency",
-                      currency: "EUR",
-                    })}
-                  </TableCell>
-                  <TableCell>
-                    {ligne.montant_total.toLocaleString("fr-FR", {
-                      style: "currency",
-                      currency: "EUR",
-                    })}
-                  </TableCell>
-                  <TableCell className="text-right space-x-2">
-                    <Button variant="outline" size="sm">
-                      <Pencil size={14} /> {/* Éditer */}
-                    </Button>
-                    <Button variant="destructive" size="sm">
-                      <Trash size={14} /> {/* Supprimer */}
-                    </Button>
-                  </TableCell>
-                </TableRow>
+            ) : commandes.length > 0 ? (
+              commandes.map((commande) => (
+                <>
+                  <TableRow key={commande.id}>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => toggleCommandeDetails(commande.id)}
+                      >
+                        {expandedCommandes.includes(commande.id) ? (
+                          <ChevronDown size={20} />
+                        ) : (
+                          <ChevronRight size={20} />
+                        )}
+                      </Button>
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      Commande {commande.id}
+                    </TableCell>
+                    <TableCell>
+                      {commande.detail_client.prenom} {commande.detail_client.nom}
+                    </TableCell>
+                    <TableCell>
+                      {commande.ligne_commandes?.length || 0} article(s)
+                    </TableCell>
+                    <TableCell>
+                      {commande.montant_total.toLocaleString("fr-FR", {
+                        style: "currency",
+                        currency: "EUR",
+                      })}
+                    </TableCell>
+                    <TableCell className="text-right space-x-2">
+                      <Button variant="outline" size="sm">
+                        <Pencil size={14} />
+                      </Button>
+                      <Button variant="destructive" size="sm">
+                        <Trash size={14} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                  {expandedCommandes.includes(commande.id) && commande.ligne_commandes && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="bg-gray-50 p-4">
+                        <div className="ml-6">
+                          <h4 className="font-medium mb-2">Détails de la commande</h4>
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                <TableHead>Produit</TableHead>
+                                <TableHead>Quantité</TableHead>
+                                <TableHead>Prix unitaire</TableHead>
+                                <TableHead>Total</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {commande.ligne_commandes.map((ligne, index) => (
+                                <TableRow key={index}>
+                                  <TableCell>
+                                    {typeof ligne.article === "object"
+                                      ? ligne.article.nom
+                                      : `Article #${ligne.article}`}
+                                  </TableCell>
+                                  <TableCell>{ligne.quantite}</TableCell>
+                                  <TableCell>
+                                    {ligne.prix_unitaire.toLocaleString("fr-FR", {
+                                      style: "currency",
+                                      currency: "EUR",
+                                    })}
+                                  </TableCell>
+                                  <TableCell>
+                                    {ligne.montant_total.toLocaleString("fr-FR", {
+                                      style: "currency",
+                                      currency: "EUR",
+                                    })}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </>
               ))
             ) : (
               <TableRow>
@@ -157,7 +203,10 @@ const SalesTable = () => {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={4}>Total</TableCell>
+              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell className="font-bold">
+                {commandes.reduce((sum, cmd) => sum + (cmd.ligne_commandes?.length || 0), 0)} article(s)
+              </TableCell>
               <TableCell className="font-bold">
                 {totalVentes.toLocaleString("fr-FR", {
                   style: "currency",
@@ -177,7 +226,6 @@ const SalesTable = () => {
         products={products}
         onSuccess={handleRefreshAfterCreate}
       />
-
     </div>
   );
 };

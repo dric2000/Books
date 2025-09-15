@@ -20,7 +20,7 @@ const BookItem = ({ id, product }: BookItemProps) => {
           <Badge variant="outline">{product.reference}</Badge>
         </div>
         <CardContent className="">
-          <img src="/cover.png" alt="" className="rounded-md transform transition-transform duration-300 group-hover:scale-110" onClick={handleClick} />
+          <img src={product.image || "cover.png"} alt="" className="rounded-md transform transition-transform duration-300 group-hover:scale-110" onClick={handleClick} />
         </CardContent>
 
         <Separator className="my-4" />
